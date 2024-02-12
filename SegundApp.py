@@ -45,6 +45,3 @@ elif conversion_option == "Centímetros a Pulgadas":
 
 # Mostrar el resultado centrado
 st.write("Resultado:", result)
-```
-
-Con estas modificaciones, tanto la entrada del valor a convertir como el resultado estarán centrados en la pantalla de la aplicación. Espero que esto sea lo que buscas. Si tienes alguna otra pregunta o necesitas más ayuda, no dudes en preguntar.
