@@ -1,115 +1,63 @@
 import streamlit as st
 
-def main():
-    st.title("Conversor Universal")
+st.title("Aplicación de Conversiones")
 
-    category = st.sidebar.selectbox("Selecciona una categoría:", [
-        "Temperatura",
-        "Longitud",
-        "Peso/Masa",
-        "Volumen",
-        "Tiempo",
-        "Velocidad",
-        "Área",
-        "Energía",
-        "Presión",
-        "Tamaño de datos"
-    ])
+# Conversiones de temperatura
+st.header("Conversiones de temperatura")
+celsius = st.number_input("Ingrese grados Celsius")
+fahrenheit = celsius * 9/5 + 32
+st.write(f"{celsius} grados Celsius equivalen a {fahrenheit} grados Fahrenheit")
 
-    if category == "Temperatura":
-        temperature_converter()
-    elif category == "Longitud":
-        length_converter()
-    elif category == "Peso/Masa":
-        weight_converter()
-    elif category == "Volumen":
-        volume_converter()
-    elif category == "Tiempo":
-        time_converter()
-    elif category == "Velocidad":
-        speed_converter()
-    elif category == "Área":
-        area_converter()
-    elif category == "Energía":
-        energy_converter()
-    elif category == "Presión":
-        pressure_converter()
-    elif category == "Tamaño de datos":
-        data_size_converter()
+# Conversiones de longitud
+st.header("Conversiones de longitud")
+metros = st.number_input("Ingrese metros")
+pies = metros * 3.28084
+st.write(f"{metros} metros equivalen a {pies} pies")
 
-def temperature_converter():
-    st.subheader("Conversiones de temperatura")
-    temp_from = st.selectbox("Desde:", ["Celsius", "Fahrenheit", "Kelvin"])
-    temp_to = st.selectbox("A:", ["Celsius", "Fahrenheit", "Kelvin"])
-    temp_input = st.number_input("Ingrese el valor a convertir:")
-    converted_temp = convert_temperature(temp_input, temp_from, temp_to)
-    st.write(f"{temp_input} {temp_from} equivale a {converted_temp:.2f} {temp_to}")
+# Conversiones de peso/masa
+st.header("Conversiones de peso/masa")
+libras = st.number_input("Ingrese libras")
+kilogramos = libras * 0.453592
+st.write(f"{libras} libras equivalen a {kilogramos} kilogramos")
 
-def convert_temperature(value, from_unit, to_unit):
-    if from_unit == "Celsius":
-        if to_unit == "Fahrenheit":
-            return (value * 9/5) + 32
-        elif to_unit == "Kelvin":
-            return value + 273.15
-    elif from_unit == "Fahrenheit":
-        if to_unit == "Celsius":
-            return (value - 32) * 5/9
-        elif to_unit == "Kelvin":
-            return (value + 459.67) * 5/9
-    elif from_unit == "Kelvin":
-        if to_unit == "Celsius":
-            return value - 273.15
-        elif to_unit == "Fahrenheit":
-            return (value * 9/5) - 459.67
+# Conversiones de volumen
+st.header("Conversiones de volumen")
+litros = st.number_input("Ingrese litros")
+galones = litros * 0.264172
+st.write(f"{litros} litros equivalen a {galones} galones")
 
-def length_converter():
-    st.subheader("Conversiones de longitud")
-    length_from = st.selectbox("Desde:", ["Pies", "Metros", "Pulgadas", "Centímetros"])
-    length_to = st.selectbox("A:", ["Pies", "Metros", "Pulgadas", "Centímetros"])
-    length_input = st.number_input("Ingrese el valor a convertir:")
-    converted_length = convert_length(length_input, length_from, length_to)
-    st.write(f"{length_input} {length_from} equivale a {converted_length:.2f} {length_to}")
+# Conversiones de tiempo
+st.header("Conversiones de tiempo")
+horas = st.number_input("Ingrese horas")
+minutos = horas * 60
+st.write(f"{horas} horas equivalen a {minutos} minutos")
 
-def convert_length(value, from_unit, to_unit):
-    conversion_factors = {
-        "Pies": {"Metros": 0.3048, "Pulgadas": 12, "Centímetros": 30.48},
-        "Metros": {"Pies": 3.28084, "Pulgadas": 39.3701, "Centímetros": 100},
-        "Pulgadas": {"Pies": 0.0833333, "Metros": 0.0254, "Centímetros": 2.54},
-        "Centímetros": {"Pies": 0.0328084, "Metros": 0.01, "Pulgadas": 0.393701}
-    }
-    return value * conversion_factors[from_unit][to_unit]
+# Conversiones de velocidad
+st.header("Conversiones de velocidad")
+millas_por_hora = st.number_input("Ingrese millas por hora")
+kilometros_por_hora = millas_por_hora * 1.60934
+st.write(f"{millas_por_hora} millas por hora equivalen a {kilometros_por_hora} kilómetros por hora")
 
-def weight_converter():
-    st.subheader("Conversiones de peso/masa")
-    # Completa con la implementación de la conversión de peso/masa
+# Conversiones de área
+st.header("Conversiones de área")
+metros_cuadrados = st.number_input("Ingrese metros cuadrados")
+pies_cuadrados = metros_cuadrados * 10.7639
+st.write(f"{metros_cuadrados} metros cuadrados equivalen a {pies_cuadrados} pies cuadrados")
 
-def volume_converter():
-    st.subheader("Conversiones de volumen")
-    # Completa con la implementación de la conversión de volumen
+# Conversiones de energía
+st.header("Conversiones de energía")
+julios = st.number_input("Ingrese julios")
+calorias = julios * 0.000239006
+st.write(f"{julios} julios equivalen a {calorias} calorías")
 
-def time_converter():
-    st.subheader("Conversiones de tiempo")
-    # Completa con la implementación de la conversión de tiempo
+# Conversiones de presión
+st.header("Conversiones de presión")
+pascales = st.number_input("Ingrese pascales")
+atmosferas = pascales * 0.00000986923
+st.write(f"{pascales} pascales equivalen a {atmosferas} atmósferas")
 
-def speed_converter():
-    st.subheader("Conversiones de velocidad")
-    # Completa con la implementación de la conversión de velocidad
-
-def area_converter():
-    st.subheader("Conversiones de área")
-    # Completa con la implementación de la conversión de área
-
-def energy_converter():
-    st.subheader("Conversiones de energía")
-    # Completa con la implementación de la conversión de energía
-
-def pressure_converter():
-    st.subheader("Conversiones de presión")
-    # Completa con la implementación de la conversión de presión
-
-def data_size_converter():
-    st.subheader("Conversiones de tamaño de datos")
-    # Completa con la implementación de la conversión de tamaño de datos
-
-if __name__ == "__main__":
-    main()
+# Conversiones de tamaño de datos
+st.header("Conversiones de tamaño de datos")
+megabytes = st.number_input("Ingrese megabytes")
+gigabytes = megabytes * 0.001
+st.write(f"{megabytes} megabytes equivalen a {gigabytes} gigabytes")
