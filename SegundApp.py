@@ -63,40 +63,53 @@ def convert_temperature(value, from_unit, to_unit):
             return (value * 9/5) - 459.67
 
 def length_converter():
-    # Función para conversiones de longitud
-    pass
+    st.subheader("Conversiones de longitud")
+    length_from = st.selectbox("Desde:", ["Pies", "Metros", "Pulgadas", "Centímetros"])
+    length_to = st.selectbox("A:", ["Pies", "Metros", "Pulgadas", "Centímetros"])
+    length_input = st.number_input("Ingrese el valor a convertir:")
+    converted_length = convert_length(length_input, length_from, length_to)
+    st.write(f"{length_input} {length_from} equivale a {converted_length:.2f} {length_to}")
+
+def convert_length(value, from_unit, to_unit):
+    conversion_factors = {
+        "Pies": {"Metros": 0.3048, "Pulgadas": 12, "Centímetros": 30.48},
+        "Metros": {"Pies": 3.28084, "Pulgadas": 39.3701, "Centímetros": 100},
+        "Pulgadas": {"Pies": 0.0833333, "Metros": 0.0254, "Centímetros": 2.54},
+        "Centímetros": {"Pies": 0.0328084, "Metros": 0.01, "Pulgadas": 0.393701}
+    }
+    return value * conversion_factors[from_unit][to_unit]
 
 def weight_converter():
-    # Función para conversiones de peso/masa
-    pass
+    st.subheader("Conversiones de peso/masa")
+    # Completa con la implementación de la conversión de peso/masa
 
 def volume_converter():
-    # Función para conversiones de volumen
-    pass
+    st.subheader("Conversiones de volumen")
+    # Completa con la implementación de la conversión de volumen
 
 def time_converter():
-    # Función para conversiones de tiempo
-    pass
+    st.subheader("Conversiones de tiempo")
+    # Completa con la implementación de la conversión de tiempo
 
 def speed_converter():
-    # Función para conversiones de velocidad
-    pass
+    st.subheader("Conversiones de velocidad")
+    # Completa con la implementación de la conversión de velocidad
 
 def area_converter():
-    # Función para conversiones de área
-    pass
+    st.subheader("Conversiones de área")
+    # Completa con la implementación de la conversión de área
 
 def energy_converter():
-    # Función para conversiones de energía
-    pass
+    st.subheader("Conversiones de energía")
+    # Completa con la implementación de la conversión de energía
 
 def pressure_converter():
-    # Función para conversiones de presión
-    pass
+    st.subheader("Conversiones de presión")
+    # Completa con la implementación de la conversión de presión
 
 def data_size_converter():
-    # Función para conversiones de tamaño de datos
-    pass
+    st.subheader("Conversiones de tamaño de datos")
+    # Completa con la implementación de la conversión de tamaño de datos
 
 if __name__ == "__main__":
     main()
