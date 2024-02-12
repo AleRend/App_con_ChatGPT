@@ -4,21 +4,19 @@ import streamlit as st
 st.title("Conversor de Temperatura y Longitud")
 
 # Opciones para la conversión de temperatura
-st.sidebar.header("Conversión de Temperatura")
-temp_option = st.sidebar.selectbox(
+temp_option = st.selectbox(
     "Seleccione una conversión de temperatura:",
     ("Celsius a Fahrenheit", "Fahrenheit a Celsius", "Celsius a Kelvin", "Kelvin a Celsius")
 )
 
 # Opciones para la conversión de longitud
-st.sidebar.header("Conversión de Longitud")
-length_option = st.sidebar.selectbox(
+length_option = st.selectbox(
     "Seleccione una conversión de longitud:",
     ("Pies a Metros", "Metros a Pies", "Pulgadas a Centímetros", "Centímetros a Pulgadas")
 )
 
 # Entrada de usuario para la temperatura o longitud a convertir
-input_value = st.sidebar.number_input("Ingrese el valor a convertir:")
+input_value = st.number_input("Ingrese el valor a convertir:", step=0.01)
 
 # Realizar la conversión
 if temp_option == "Celsius a Fahrenheit":
