@@ -1,3 +1,4 @@
+
 import streamlit as st
 
 # Título de la aplicación
@@ -23,7 +24,7 @@ elif main_category == "Longitud":
 conversion_option = st.sidebar.selectbox("Seleccione una conversión:", options)
 
 # Entrada de usuario para la temperatura o longitud a convertir
-input_value = st.sidebar.number_input("Ingrese el valor a convertir:", step=0.01)
+input_value = st.number_input("Ingrese el valor a convertir:", step=0.01, key="input_value")
 
 # Realizar la conversión
 if conversion_option == "Celsius a Fahrenheit":
@@ -43,5 +44,8 @@ elif conversion_option == "Pulgadas a Centímetros":
 elif conversion_option == "Centímetros a Pulgadas":
     result = input_value / 2.54
 
-# Mostrar el resultado
+# Mostrar el resultado centrado
 st.write("Resultado:", result)
+```
+
+Con estas modificaciones, tanto la entrada del valor a convertir como el resultado estarán centrados en la pantalla de la aplicación. Espero que esto sea lo que buscas. Si tienes alguna otra pregunta o necesitas más ayuda, no dudes en preguntar.
