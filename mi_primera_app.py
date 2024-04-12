@@ -1,43 +1,81 @@
 import streamlit as st
 import pandas as pd
-import geopandas as gpd
-import numpy as np
 
-def main():
-    st.title("Calculadora Sencilla con Pandas y GeoPandas")
+# Definir datos de usuarios (simulados)
+users_data = {
+    "username": ["user1", "user2"],
+    "password": ["password1", "password2"],
+    "calories": [0, 0]
+}
+users_df = pd.DataFrame(users_data)
 
-    num1 = st.number_input("Ingresa el primer número:", step=1)
-    num2 = st.number_input("Ingresa el segundo número:", step=1)
+# Función para el inicio de sesión
+def login(username, password):
+    if username in users_df["username"].values:
+        user_row = users_df.loc[users_df["username"] == username]
+        if user_row["password"].values[0] == password:
+            return True
+    return False
 
-    operation = st.selectbox("Selecciona la operación:", ["Suma", "Resta", "Multiplicación", "División"])
+# Función para registrar un nuevo usuario
+def register(username, password):
+    if username not in users_df["username"].values:
+        users_df.loc[len(users_df)] = [username, password, 0]
+        return True
+    return False
 
-    if st.button("Calcular"):
-        result = calculate(num1, num2, operation)
-        st.success("Resultado:")
-        st.write(create_dataframe(result))
+# Función para obtener las calorías de un usuario
+def get_calories(username):
+    return users_df.loc[users_df["username"] == username, "calories"].values[0]
 
-def calculate(num1, num2, operation):
-    if operation == "Suma":
-        return num1 + num2
-    elif operation == "Resta":
-        return num1 - num2
-    elif operation == "Multiplicación":
-        return num1 * num2
-    elif operation == "División":
-        if num2 == 0:
-            return "Error: División por cero"
+# Función para registrar calorías consumidas
+def log_calories(username, calories):
+    users_df.loc[users_df["username"] == username, "calories"] += calories
+
+# Página de inicio de sesión
+def login_page():
+    st.title("Inicio de Sesión")
+    username = st.text_input("Usuario")
+    password = st.text_input("Contraseña", type="password")
+    if st.button("Iniciar Sesión"):
+        if login(username, password):
+            st.success(f"Bienvenido, {username}!")
+            return username
         else:
-            return num1 / num2
+            st.error("Usuario o contraseña incorrectos")
 
-def create_dataframe(result):
-    data = {"Resultado": [result]}
-    df = pd.DataFrame(data)
-    
-    # Creamos un DataFrame geoespacial con coordenadas aleatorias
-    np.random.seed(0)
-    points = gpd.GeoDataFrame(geometry=gpd.points_from_xy(np.random.uniform(-180, 180, 10), np.random.uniform(-90, 90, 10)))
-    
-    return df, points
+# Página de registro
+def register_page():
+    st.title("Registro")
+    username = st.text_input("Usuario")
+    password = st.text_input("Contraseña", type="password")
+    if st.button("Registrar"):
+        if register(username, password):
+            st.success("Usuario registrado correctamente")
+        else:
+            st.error("El usuario ya existe")
+
+# Página principal
+def main_page(username):
+    st.title("Registro de Calorías")
+    st.write(f"Bienvenido, {username}!")
+    calories = st.number_input("Calorías consumidas hoy", value=0, step=1)
+    if st.button("Registrar Calorías"):
+        log_calories(username, calories)
+        st.success("Calorías registradas correctamente")
+    st.write(f"Total de calorías consumidas hoy: {get_calories(username)}")
+
+# App
+def main():
+    st.sidebar.title("Menú")
+    page = st.sidebar.selectbox("Selecciona una opción", ["Inicio de Sesión", "Registro"])
+
+    if page == "Inicio de Sesión":
+        username = login_page()
+        if username:
+            main_page(username)
+    elif page == "Registro":
+        register_page()
 
 if __name__ == "__main__":
     main()
