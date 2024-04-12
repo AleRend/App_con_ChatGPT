@@ -26,7 +26,6 @@ def register(username, password):
         return True
     return False
 
-
 # Función para obtener las calorías de un usuario
 def get_calories(username):
     return users_df.loc[users_df["username"] == username, "calories"].values[0]
