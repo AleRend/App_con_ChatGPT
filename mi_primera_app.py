@@ -20,9 +20,12 @@ def login(username, password):
 # Función para registrar un nuevo usuario
 def register(username, password):
     if username not in users_df["username"].values:
-        users_df.loc[len(users_df)] = [username, password, 0]
+        new_user = pd.DataFrame({"username": [username], "password": [password], "calories": [0]})
+        global users_df
+        users_df = pd.concat([users_df, new_user], ignore_index=True)
         return True
     return False
+
 
 # Función para obtener las calorías de un usuario
 def get_calories(username):
